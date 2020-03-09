@@ -45,6 +45,15 @@ public class ServiceTest {
         assertEquals(size, getStudentiSize());
     }
 
+    @Test
+    public void addStudent2() {
+        Student student = new Student("1", "Name", 932, "examle@domain.com");
+        int size = getStudentiSize();
+
+        service.addStudent(student);
+        assertEquals(size, getStudentiSize());
+    }
+
     private int getStudentiSize() {
         List<Student> studenti = StreamSupport
                 .stream(service.getAllStudenti().spliterator(), false)
