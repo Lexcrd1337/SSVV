@@ -9,5 +9,8 @@
         <module name="932_CozmaCipcigan" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="932_CozmaCipcigan" target="8" />
+    </bytecodeTargetLevel>
   </component>
 </project>
