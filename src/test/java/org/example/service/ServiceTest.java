@@ -1,6 +1,7 @@
 package org.example.service;
 
 import org.example.domain.Student;
+import org.example.domain.Tema;
 import org.example.repository.NotaXMLRepo;
 import org.example.repository.StudentXMLRepo;
 import org.example.repository.TemaXMLRepo;
@@ -182,9 +183,40 @@ public class ServiceTest {
         assertEquals(size, getStudentiSize());
     }
 
+    private int getTemeSize() {
+        List<Tema> teme = StreamSupport
+                .stream(service.getAllTeme().spliterator(), false)
+                .collect(Collectors.toList());
+        return teme.size();
+    }
 
+    @Test
+    public void addAssignment() {
+        Tema tema = new Tema("2", "Descriere", 12, 10);
+        int size = getTemeSize();
 
+        try {
+            service.addTema(tema);
+        } catch (Exception ignored) {
 
+        }
 
+        assertEquals(size + 1, getTemeSize());
+        service.deleteTema(tema.getID());
+    }
 
+    @Test
+    public void addAssignment2() {
+        Tema tema = new Tema("4", "Descriere", -1, 12);
+        int size = getTemeSize();
+
+        try {
+            service.addTema(tema);
+        } catch (Exception ignored) {
+
+        }
+
+        assertEquals(size, getTemeSize());
+        service.deleteTema(tema.getID());
+    }
 }
