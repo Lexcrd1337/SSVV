@@ -217,6 +217,104 @@ public class ServiceTest {
         }
 
         assertEquals(size, getTemeSize());
-        service.deleteTema(tema.getID());
+    }
+
+    @Test
+    public void addAssignmentBadId1() {
+        Tema tema = new Tema("", "Descriere", 14, 12);
+        int size = getTemeSize();
+
+        try {
+            service.addTema(tema);
+        } catch (Exception ignored) {
+
+        }
+
+        assertEquals(size, getTemeSize());
+    }
+
+    @Test
+    public void addAssignmentBadId2() {
+        Tema tema = new Tema(null, "Descriere", 14, 12);
+        int size = getTemeSize();
+
+        try {
+            service.addTema(tema);
+        } catch (Exception ignored) {
+
+        }
+
+        assertEquals(size, getTemeSize());
+    }
+
+
+    @Test
+    public void addAssignmentBadDescription() {
+        Tema tema = new Tema("6", "", 14, 12);
+        int size = getTemeSize();
+
+        try {
+            service.addTema(tema);
+        } catch (Exception ignored) {
+
+        }
+
+        assertEquals(size, getTemeSize());
+    }
+
+    @Test
+    public void addAssignmentBadDeadline1() {
+        Tema tema = new Tema("6", "Descriere", 0, 12);
+        int size = getTemeSize();
+
+        try {
+            service.addTema(tema);
+        } catch (Exception ignored) {
+
+        }
+
+        assertEquals(size, getTemeSize());
+    }
+
+    @Test
+    public void addAssignmentBadDeadline2() {
+        Tema tema = new Tema("6", "Descriere", 15, 12);
+        int size = getTemeSize();
+
+        try {
+            service.addTema(tema);
+        } catch (Exception ignored) {
+
+        }
+
+        assertEquals(size, getTemeSize());
+    }
+
+    @Test
+    public void addAssignmentBadReceive1() {
+        Tema tema = new Tema("6", "Descriere", 14, 0);
+        int size = getTemeSize();
+
+        try {
+            service.addTema(tema);
+        } catch (Exception ignored) {
+
+        }
+
+        assertEquals(size, getTemeSize());
+    }
+
+    @Test
+    public void addAssignmentBadReceive2() {
+        Tema tema = new Tema("6", "Descriere", 14, 15);
+        int size = getTemeSize();
+
+        try {
+            service.addTema(tema);
+        } catch (Exception ignored) {
+
+        }
+
+        assertEquals(size, getTemeSize());
     }
 }
