@@ -1,5 +1,6 @@
 package org.example.service;
 
+import org.example.domain.Nota;
 import org.example.domain.Student;
 import org.example.domain.Tema;
 import org.example.repository.NotaXMLRepo;
@@ -11,8 +12,7 @@ import org.example.validation.TemaValidator;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.io.FileNotFoundException;
-import java.io.PrintWriter;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
@@ -316,5 +316,51 @@ public class ServiceTest {
         }
 
         assertEquals(size, getTemeSize());
+    }
+
+    @Test
+    public void integrationTestingAddAssignment() {
+        Student student = new Student("4070", "Name", 932, "examle@domain.com");
+        int studentsSize = getStudentiSize();
+        service.addStudent(student);
+        assertEquals(studentsSize + 1, getStudentiSize());
+
+        Tema tema = new Tema("2", "Descriere", 12, 10);
+        int temeSize = getTemeSize();
+
+        try {
+            service.addTema(tema);
+        } catch (Exception ignored) {
+
+        }
+
+        assertEquals(temeSize + 1, getTemeSize());
+        service.deleteTema(tema.getID());
+        service.deleteStudent(student.getID());
+    }
+
+    @Test
+    public void integrationTestingAddGrade() {
+        Student student = new Student("4070", "Name", 932, "examle@domain.com");
+        int studentsSize = getStudentiSize();
+        service.addStudent(student);
+        assertEquals(studentsSize + 1, getStudentiSize());
+
+        Tema tema = new Tema("2", "Descriere", 12, 10);
+        int temeSize = getTemeSize();
+
+        try {
+            service.addTema(tema);
+        } catch (Exception ignored) {
+
+        }
+
+        Nota nota = new Nota("101", student.getID(), tema.getID(), 9.5, LocalDate.of(2018, 10, 8));
+        service.addNota(nota, "Keep up the good work!");
+
+        assertEquals(temeSize + 1, getTemeSize());
+        service.deleteNota(nota.getID());
+        service.deleteTema(tema.getID());
+        service.deleteStudent(student.getID());
     }
 }
